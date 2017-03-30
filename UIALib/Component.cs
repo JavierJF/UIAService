@@ -29,15 +29,6 @@ namespace UIALib
         /// </summary>
         public string type { get; set; }
         /// <summary>
-        /// Field that is created in the moment of instantiation for the component.
-        /// </summary>
-        public string id { get; set; }
-        /// <summary>
-        /// List of the tree nodes of the UI Automation tree that leads to the node
-        /// that provides de reactivity for this component.
-        /// </summary>
-        public List<STreeNode> path { get; set; }
-        /// <summary>
         /// List of the components that depends on this one, and which instantiation
         /// depends on this one.
         /// </summary>
