@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -43,6 +44,12 @@
     <Reference Include="System.Net">
       <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Net.dll</HintPath>
     </Reference>
+    <Reference Include="System.Reactive.Core, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Core.3.1.1\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Interfaces.3.1.1\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
     <Reference Include="System.Reactive.PlatformServices, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reactive.PlatformServices.3.0.0\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
@@ -56,18 +63,30 @@
     <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\CompLogger.cs" />
+    <Compile Include="Components\ImpComps.cs" />
+    <Compile Include="Components\Logger.cs" />
+    <Compile Include="Components\UIANode.cs" />
+    <Compile Include="Types\ComManager.cs" />
     <Compile Include="Types\CompParser.cs" />
     <Compile Include="Types\Comp.cs" />
     <Compile Include="Types\CSelector.cs" />
+    <Compile Include="Types\EComp.cs" />
     <Compile Include="Types\Event.cs" />
     <Compile Include="Types\CompSpec.cs" />
     <Compile Include="Types\EventSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Types\EWComp.cs" />
+    <Compile Include="Types\Experimental.cs" />
     <Compile Include="Types\RunComp.cs" />
-    <Compile Include="UIABinds\TraversingFns.cs" />
-    <Compile Include="UIABinds\TreeTypes.cs" />
+    <Compile Include="Components\WindowAppDetector.cs" />
+    <Compile Include="Types\WComp.cs" />
+    <Compile Include="UIAUtils\AttacherFn.cs" />
+    <Compile Include="UIAUtils\TraversingFns.cs" />
+    <Compile Include="UIAUtils\TreeTypes.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -76,8 +95,6 @@
       <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

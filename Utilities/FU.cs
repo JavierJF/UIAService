@@ -18,8 +18,8 @@ namespace Utilities
 {
     public class FU
     {
-        public delegate Either<S,E> ItFn<S,E>(S a);
-        public delegate bool ItCheck<S,E>(Either<S,E> res);
+        public delegate Either<S, E> ItFn<S, E>(S a);
+        public delegate bool ItCheck<S, E>(Either<S, E> res);
 
         /// <summary>
         /// Generic type-safe while, for state iteration until a certain
@@ -46,12 +46,12 @@ namespace Utilities
         /// <returns>
         /// Either the final computed state or an Error.
         /// </returns>
-        public static Either<S,E> whileS<S,E>(ItFn<S,E> iFn
-                                             , ItCheck<S,E> check
+        public static Either<S, E> whileS<S, E>(ItFn<S, E> iFn
+                                             , ItCheck<S, E> check
                                              , S s) where S : ICloneable
         {
             S iniS = (S)s.Clone();
-            Either<S,E> state = iniS;
+            Either<S, E> state = iniS;
 
             while (check(state))
             {
@@ -69,6 +69,35 @@ namespace Utilities
             }
 
             return state;
+        }
+
+        public delegate bool ItCheck<S>(S s);
+        public delegate S ItFn<S>(S s);
+
+        public static S whileC<S>(ItCheck<S> check
+                                 , ItFn<S> fn
+                                 , S s) where S : ICloneable
+        {
+            S res = (S)s.Clone();
+            
+            while(check(res))
+            {
+                res = fn(res);
+            }
+
+            return res;
+        }
+
+        public static string noTypesMatch(List<Type> types)
+        {
+            var msg = "Non of the following types match: ";
+
+            foreach(var type in types)
+            {
+                msg += type + ", ";
+            }
+
+            return msg;
         }
     }
 }

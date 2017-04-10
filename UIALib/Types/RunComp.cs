@@ -15,7 +15,7 @@ using System.Windows.Automation;
 using LanguageExt;
 using static LanguageExt.Prelude;
 
-namespace UIALib
+namespace UIALib.Types
 {
     /// <summary>
     /// Runtime component created when a 'RComponent specification' is
@@ -30,7 +30,7 @@ namespace UIALib
         /// <summary>
         /// RComponent specification.
         /// </summary>
-        Component comp { get; set; }
+        Comp comp { get; set; }
         /// <summary>
         /// Automation element that works as reactivity source for the
         /// component.

@@ -82,7 +82,8 @@ namespace UIALib
 
                 if (errors.Any())
                 {
-                    return new ParsingError { file = filepath, message = "Errors: " + errors };
+                    return new ParsingError { file = filepath
+                                            , message = "Errors: " + errors };
                 }
                 else
                 {

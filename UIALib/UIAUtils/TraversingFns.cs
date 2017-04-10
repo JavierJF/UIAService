@@ -415,9 +415,10 @@ namespace UIALib
         /// <param name="relPath">The relative path at the starting point.</param>
         /// <param name="dstPath">The destination path we want to reach.</param>
         /// <returns>Either and error or the Node that was being looking for.</returns>
-        public static Either<WalkerError, AutomationElement> walkTree(AutomationElement curNode
-                                                                     , List<VTreeNode> relPath
-                                                                     , List<Either<STreeNode, CTreeNode>> dstPath)
+        public static
+            Either<WalkerError, AutomationElement> walkTree(AutomationElement curNode
+                                                           , List<VTreeNode> relPath
+                                                           , List<Either<STreeNode, CTreeNode>> dstPath)
         {
             var iniState = new WState { relPath = new List<VTreeNode>(relPath)
                                       , destPath = new List<Either<STreeNode, CTreeNode>>(dstPath)
@@ -462,11 +463,11 @@ namespace UIALib
         /// <returns>
         /// Nothing if the 'handler' has beeing attached correctly, or an error if not.
         /// </returns>
-        public static Option<WalkerError> attachHandler(List<Either<STreeNode, CTreeNode>> elmPath
-                                                       , AutomationEvent id
-                                                       , AutomationElement startNode
-                                                       , TreeScope scope
-                                                       , AutomationEventHandler handler)
+        public static Option<WalkerError> attachAuEventHandler(List<Either<STreeNode, CTreeNode>> elmPath
+                                                              , AutomationEvent id
+                                                              , AutomationElement startNode
+                                                              , TreeScope scope
+                                                              , AutomationEventHandler handler)
         {
             var nodeE = walkTree(startNode, new List<VTreeNode> { }, elmPath);
 
@@ -479,6 +480,50 @@ namespace UIALib
                     Right: (node) =>
                     {
                         Automation.AddAutomationEventHandler(id, node, scope, handler);
+                        return None;
+                    }
+                );
+        }
+
+        /// <summary>
+        /// Function that attach an structure event handler at the end of the desired supplied path.
+        /// </summary>
+        /// <param name="elmPath">
+        /// Path in which we want to attach
+        /// </param>
+        /// <param name="id">
+        /// Id of the event we want the handler to respond.
+        /// </param>
+        /// <param name="startNode">
+        /// The node we are going to use at start point, from we are going to start trasversing
+        /// the three.
+        /// </param>
+        /// <param name="scope">
+        /// The part of the three we want the handler to take into account for event
+        /// events.
+        /// </param>
+        /// <param name="handler">
+        /// The handler itself that we want to attach.
+        /// </param>
+        /// <returns>
+        /// Nothing if the 'handler' has beeing attached correctly, or an error if not.
+        /// </returns>
+        public static Option<WalkerError> attachStEventHandler(List<Either<STreeNode, CTreeNode>> elmPath
+                                                              , AutomationElement startNode
+                                                              , TreeScope scope
+                                                              , StructureChangedEventHandler handler)
+        {
+            var nodeE = walkTree(startNode, new List<VTreeNode> { }, elmPath);
+
+            return
+                nodeE.Match<Option<WalkerError>>(
+                    Left: (error) =>
+                    {
+                        return error;
+                    },
+                    Right: (node) =>
+                    {
+                        Automation.AddStructureChangedEventHandler(node, scope, handler);
                         return None;
                     }
                 );
@@ -618,6 +663,38 @@ namespace UIALib
             }
         }
 
+        public static List<AutomationElement> getChildren(AutomationElement e)
+        {
+            var children = new List<AutomationElement>();
+            var child = TreeWalker.RawViewWalker.GetFirstChild(e);
+
+            if (child == null)
+            {
+                return children;
+            }
+            else
+            {
+                bool nSibling = true;
+
+                while(nSibling)
+                {
+                    var nextSibling = TreeWalker.RawViewWalker.GetNextSibling(child);
+
+                    if (nextSibling != null)
+                    {
+                        children.Add(nextSibling);
+                        child = nextSibling;
+                    }
+                    else
+                    {
+                        nSibling = false;
+                    }
+                }
+            }
+
+            return children;
+        }
+
         /// <summary>
         /// Function for manually testing tree trasversing.
         /// </summary>
@@ -645,7 +722,7 @@ namespace UIALib
                     }
                     else
                     {
-                        var res = attachHandler(relPath
+                        var res = attachAuEventHandler(relPath
                                      , AutomationEvent.LookupById(20003)
                                      , currNode
                                      , TreeScope.Children
