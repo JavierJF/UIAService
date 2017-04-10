@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIALib-UTests", "UIALib-UTe
 		{44D78621-EA01-446C-BED6-EC46AE132BE4} = {44D78621-EA01-446C-BED6-EC46AE132BE4}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIAUtils-Test", "..\UIAUtils-Test\UIAUtils-Test.csproj", "{6A501021-391F-4C09-8A25-4E6066EE60E7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UIAUtils-Test", "UIAUtils-Test\UIAUtils-Test.csproj", "{6A501021-391F-4C09-8A25-4E6066EE60E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
