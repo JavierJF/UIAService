@@ -15,7 +15,7 @@ using LanguageExt;
 using static LanguageExt.Prelude;
 using static Utilities.FU;
 
-namespace UIALib
+namespace UIALib.Utils.DFunctions
 {
     /// <summary>
     /// Class that stores the functions to trasverse the tree. Needed for

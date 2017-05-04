@@ -15,7 +15,7 @@ using System.Windows.Automation;
 using LanguageExt;
 using static LanguageExt.Prelude;
 
-namespace UIALib
+namespace UIALib.Utils
 {
     public class StruChange
     {

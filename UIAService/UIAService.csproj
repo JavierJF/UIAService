@@ -59,7 +59,6 @@
     <Reference Include="UIAutomationTypes" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TreeStructure.cs" />
     <Compile Include="UIAS.cs">
       <SubType>Component</SubType>
     </Compile>

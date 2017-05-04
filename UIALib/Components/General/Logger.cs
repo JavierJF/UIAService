@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Automation;
 using LanguageExt;
 using UIALib.Types;
+using UIALib.Utils.Types;
 
 namespace UIALib.Components
 {
@@ -13,8 +14,7 @@ namespace UIALib.Components
     {
         public string name => "Logger";
         public string type => "Log";
-        public Dictionary<string, string> props
-            => new Dictionary<string, string>{};
+        public Tree<string> props => new Tree<string>{};
 
         /// <summary>
         /// Necessity for debugging ERROR here
@@ -32,7 +32,7 @@ namespace UIALib.Components
             CompLogger.log(this, "Fatal logging Error");
         }
 
-        public void OnNext(object value)
+        public void OnNext(Event<object> value)
         {
             var msg = value as Event<string>;
 

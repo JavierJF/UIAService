@@ -6,14 +6,7 @@
  * Federal Government.
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reactive;
-using System.Reactive.Subjects;
-using System.Reactive.Disposables;
-using System;
+using UIALib.Utils.Types;
 
 namespace UIALib.Types
 {
@@ -40,6 +33,6 @@ namespace UIALib.Types
         /// for the matching.
         /// </summary>
         /// <returns></returns>
-        Dictionary<string, string> props { get; }
+        Tree<string> props { get; }
     }
 }

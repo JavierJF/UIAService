@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EventHook, Version=1.4.39.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EventHook.1.4.39\lib\net45\EventHook.dll</HintPath>
+    </Reference>
     <Reference Include="LanguageExt.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\LanguageExt.Core.1.9.7\lib\net45\LanguageExt.Core.dll</HintPath>
     </Reference>
@@ -39,8 +42,18 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Nito.AsyncEx, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Concurrent, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.Concurrent.dll</HintPath>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Enlightenment, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Net">
       <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5.2\System.Net.dll</HintPath>
     </Reference>
@@ -50,9 +63,13 @@
     <Reference Include="System.Reactive.Interfaces, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reactive.Interfaces.3.1.1\lib\net45\System.Reactive.Interfaces.dll</HintPath>
     </Reference>
+    <Reference Include="System.Reactive.Linq, Version=3.0.1000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.Linq.3.1.1\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System.Reactive.PlatformServices, Version=3.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reactive.PlatformServices.3.0.0\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,33 +78,53 @@
     <Reference Include="System.Xml" />
     <Reference Include="UIAutomationClient" />
     <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Components\CompLogger.cs" />
+    <Compile Include="Components\General\CompLogger.cs" />
+    <Compile Include="Components\UIA\Recorder\EmitterWatcher\ActionRecorder.cs" />
+    <Compile Include="Components\UIA\Recorder\EmitterWatcher\CompPathRecorder.cs" />
+    <Compile Include="Components\UIA\FutureWork\DUIANode.cs" />
     <Compile Include="Components\ImpComps.cs" />
-    <Compile Include="Components\Logger.cs" />
-    <Compile Include="Components\UIANode.cs" />
+    <Compile Include="Components\General\Logger.cs" />
+    <Compile Include="Components\UIA\Recorder\Emitters\MoseMoved.cs" />
+    <Compile Include="Components\UIA\Recorder\EmitterWatcher\MouseStopped.cs" />
+    <Compile Include="Components\UIA\Recorder\EmitterWatcher\UIAElemPaths.cs" />
+    <Compile Include="Components\UIA\Recorder\Watchers\PathBuilder.cs" />
+    <Compile Include="Types\Base\TComp.cs" />
+    <Compile Include="Components\UIA\Recorder\EmitterWatcher\UIACompActionRecorder.cs" />
+    <Compile Include="Components\UIA\FutureWork\UIANode.cs" />
+    <Compile Include="Components\UIA\General\UIEvent.cs" />
+    <Compile Include="Components\UIA\Recorder\EmitterWatcher\UnderMouseUIA.cs" />
+    <Compile Include="Components\UIA\General\WindowsAppDetectorWatcher.cs" />
     <Compile Include="Types\ComManager.cs" />
-    <Compile Include="Types\CompParser.cs" />
-    <Compile Include="Types\Comp.cs" />
-    <Compile Include="Types\CSelector.cs" />
-    <Compile Include="Types\EComp.cs" />
-    <Compile Include="Types\Event.cs" />
-    <Compile Include="Types\CompSpec.cs" />
-    <Compile Include="Types\EventSpec.cs" />
+    <Compile Include="Types\Kinds\CompParser.cs" />
+    <Compile Include="Types\Base\Comp.cs" />
+    <Compile Include="Types\Ideas\CSelector.cs" />
+    <Compile Include="Types\Base\EComp.cs" />
+    <Compile Include="Types\Base\Event.cs" />
+    <Compile Include="Types\Specs\CompSpec.cs" />
+    <Compile Include="Types\Specs\EventSpec.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Types\EWComp.cs" />
-    <Compile Include="Types\Experimental.cs" />
-    <Compile Include="Types\RunComp.cs" />
-    <Compile Include="Components\WindowAppDetector.cs" />
-    <Compile Include="Types\WComp.cs" />
-    <Compile Include="UIAUtils\AttacherFn.cs" />
+    <Compile Include="Types\Base\EWComp.cs" />
+    <Compile Include="Types\Ideas\RunComp.cs" />
+    <Compile Include="Components\UIA\General\WindowAppDetector.cs" />
+    <Compile Include="Types\Base\WComp.cs" />
+    <Compile Include="UIAUtils\Functions\AttacherFn.cs" />
+    <Compile Include="UIAUtils\Functions\TraversingFunctions.cs" />
     <Compile Include="UIAUtils\TraversingFns.cs" />
+    <Compile Include="UIAUtils\Types\TreeStructure.cs" />
     <Compile Include="UIAUtils\TreeTypes.cs" />
+    <Compile Include="UIAUtils\Types\TreeTypes.cs" />
+    <Compile Include="UIAUtils\Types\UICTypes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\UIA\Listener\" />
+    <Folder Include="Components\UIA\Recorder\Transformers\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
@@ -95,6 +132,5 @@
       <Name>Utilities</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

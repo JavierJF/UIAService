@@ -12,7 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UIALib
+namespace UIALib.Types
 {
     /// <summary>
     /// Data type that is transmited to other component, in response to an
