@@ -24,7 +24,6 @@ namespace UIALib.Components.UIA.Recorder.Watchers {
 
         TreePath finalPath = 
             new TreePath { Path = new List<Either<STreeNode, CTreeNode>>{} };
-
         TreePath lastPath = null;
 
         public PathBuilder(IObserver<Event<object>> watcher
